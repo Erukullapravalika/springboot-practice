@@ -14,11 +14,9 @@ public class EmployeeDto {
 	}
 
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 
 	public String getDept() {
@@ -26,11 +24,9 @@ public class EmployeeDto {
 	}
 
 
-
 	public void setDept(String dept) {
 		this.dept = dept;
 	}
-
 
 
 	public Integer getAge() {
@@ -38,12 +34,9 @@ public class EmployeeDto {
 	}
 
 
-
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-
-
 
 	public EmployeeDto EmployeeMapper(Employee employee) {
 		this.setName(employee.getName());
