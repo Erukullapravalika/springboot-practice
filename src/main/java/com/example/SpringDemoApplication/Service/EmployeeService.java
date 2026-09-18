@@ -7,7 +7,11 @@ import com.example.SpringDemoApplication.DTO.EmployeeDto;
 import com.example.SpringDemoApplication.Entity.Employee;
 import com.example.SpringDemoApplication.Repository.EmployeeRepository;
 
-@Service
+/* @Service is a specialization of @component which contains business that registers class as a  spring managed bean   
+ * class marked with @Component will be managed by spring like no manual object creation
+ */
+
+@Service 
 public class EmployeeService {
 	
 	@Autowired
