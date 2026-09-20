@@ -23,7 +23,7 @@ import jakarta.annotation.PreDestroy;
  * this is the old way in order to perform customizing nature of bean
  * new approach is @PostContruct and @PreDestroy annotations
  */
-public class EmployeeService implements InitializingBean,DisposableBean {
+public class EmployeeService{
 	
 	@Autowired
 	EmployeeRepository emprepo;
@@ -34,16 +34,15 @@ public class EmployeeService implements InitializingBean,DisposableBean {
 	
 	}
 	
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		System.out.println("after property set");
-		
+	
+	@PostConstruct
+	public void init() {
+		System.out.println("action after bean creation");	
 	}
 	
-	@Override
-	public void destroy() throws Exception {
-		System.out.print("Destroyed");
-		
+	@PreDestroy
+	public void beforeDestroy() {
+		System.out.println("action before destroying bean");
 	}
-	
+
 }
