@@ -17,6 +17,7 @@ public class SpringDemoApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringDemoApplication.class, args);
 		System.out.print("Context Created");
+		applicationContext.close();
 	}
 
 }
