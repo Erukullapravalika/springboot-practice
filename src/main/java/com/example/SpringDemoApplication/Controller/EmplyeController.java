@@ -7,55 +7,36 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.SpringDemoApplication.Entity.Emplye;
 import com.example.SpringDemoApplication.Entity.User;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping(value="/api")
-@Scope("request")
-/* request scope -- one bean per one request
+@Scope("session")
+/* session scope -- new object for each Http Session
+ * when user access any api, session is created and 
+ * remains active until session is expired
  * 
- * below is the ex of two requests with different beans
- * 
- * Emplye Controller init
- * User initialized
- * user obj hashcode: 483985458
- * Emplye initialized
- * Employee Hash Code: 376379161
- * Emplye Controller Hash Code:172244726 User Object Hash Code:483985458
- * Fetch user api
- * 
+ * below is the example of session scope
  * 
  * Emplye Controller init
- * User initialized
- * user obj hashcode: 1846867309
- * Emplye initialized
- * Employee Hash Code: 1624446687
- * Emplye Controller Hash Code:1693228573 User Object Hash Code:1846867309
+ * Emplye Controller Hash Code:1971018858 User Object Hash Code:503367775
  * Fetch user api
+ * Fetch user api
+ * Fetch user apiFetch user api
  * 
+ * 
+ * Emplye Controller init
+ * Emplye Controller Hash Code:1374832410 User Object Hash Code:503367775
+ * Fetch user api
+ * Fetch user api
  */
- 
 public class EmplyeController {
 	
-	/* 
-	 * same user bean is used in EmplyeeController and UserController
-	 * singleton scope -- the same bean instance is created wherever created
-	 * 
-	 * Emplye Controller init
-	 * User initialized
-	 * user obj hashcode: 890453800
-	 * Emplye Controller Hash Code:1057743280 User Object Hash Code:890453800
-	 * User Controller Init
-	 * User Controller Hashcode:10593274 User Object Hashcode:890453800	 
-	 */
 	@Autowired
 	User user;
 	
-	@Autowired
-	Emplye emp;
 	
 	public EmplyeController() {
 		System.out.println("Emplye Controller init");
@@ -70,6 +51,13 @@ public class EmplyeController {
 	@GetMapping(path="/fetchUser")
 	public ResponseEntity<String> getUserDetails(){
 		System.out.println("Fetch user api");
+		return ResponseEntity.status(HttpStatus.OK).body("OK");
+	}
+	
+	@GetMapping(path="/logout")
+	public ResponseEntity<String> logout(HttpServletRequest request){
+		System.out.println("Fetch user api");
+		request.getSession().invalidate();
 		return ResponseEntity.status(HttpStatus.OK).body("OK");
 	}
 

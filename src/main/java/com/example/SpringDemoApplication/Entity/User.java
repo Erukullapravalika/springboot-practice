@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 
 @Component
-//@Scope("request")
-@Scope(value="request",proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class User {
 	public User() {
 		System.out.println("User initialized");
