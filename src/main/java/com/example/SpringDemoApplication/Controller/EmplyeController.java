@@ -8,16 +8,34 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.SpringDemoApplication.Entity.Emplye;
 import com.example.SpringDemoApplication.Entity.User;
 
 import jakarta.annotation.PostConstruct;
 @RestController
 @RequestMapping(value="/api")
-@Scope("prototype")
-/*
- * Prototype scope:
- * A new instance is created whenever Spring requests
- * the bean from the container.
+@Scope("request")
+/* request scope -- one bean per one request
+ * 
+ * below is the ex of two requests with different beans
+ * 
+ * Emplye Controller init
+ * User initialized
+ * user obj hashcode: 483985458
+ * Emplye initialized
+ * Employee Hash Code: 376379161
+ * Emplye Controller Hash Code:172244726 User Object Hash Code:483985458
+ * Fetch user api
+ * 
+ * 
+ * Emplye Controller init
+ * User initialized
+ * user obj hashcode: 1846867309
+ * Emplye initialized
+ * Employee Hash Code: 1624446687
+ * Emplye Controller Hash Code:1693228573 User Object Hash Code:1846867309
+ * Fetch user api
+ * 
  */
  
 public class EmplyeController {
@@ -35,6 +53,9 @@ public class EmplyeController {
 	 */
 	@Autowired
 	User user;
+	
+	@Autowired
+	Emplye emp;
 	
 	public EmplyeController() {
 		System.out.println("Emplye Controller init");

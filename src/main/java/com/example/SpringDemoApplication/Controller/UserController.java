@@ -14,7 +14,7 @@ import jakarta.annotation.PostConstruct;
 
 @RestController
 @RequestMapping(value="/api")
-@Scope("prototype")
+@Scope("request")
 public class UserController {
 	@Autowired
 	User user;
